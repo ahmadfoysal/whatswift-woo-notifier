@@ -1,0 +1,31 @@
+name: Deploy to WordPress.org
+
+# Publishing a GitHub release named after the version (for example 2.0.0)
+# uploads the plugin to WordPress.org: trunk, tags/<version> and listing assets.
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the release name matches the plugin version
+        run: |
+          version=$(grep -m1 -E '^\s*\*\s*Version:' whatswift-woo-notifier.php | sed -E 's/.*Version:\s*//' | tr -d '[:space:]')
+          stable=$(grep -m1 -E '^Stable tag:' readme.txt | sed -E 's/Stable tag:\s*//' | tr -d '[:space:]')
+          tag="${GITHUB_REF_NAME}"
+          echo "release=$tag plugin=$version readme=$stable"
+          if [ "$tag" != "$version" ] || [ "$tag" != "$stable" ]; then
+            echo "::error::Release '$tag' does not match plugin version '$version' / stable tag '$stable'."
+            exit 1
+          fi
+
+      - name: Deploy
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: whatswift-woo-notifier
