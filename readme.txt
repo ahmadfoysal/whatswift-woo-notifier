@@ -1,10 +1,10 @@
 === SwiftNotify – Instant Order Alerts for WooCommerce ===
 Contributors: ahmadfoysal
-Tags: woocommerce, order notification, message, api, sms, order alert
+Tags: woocommerce, order notification, message, sms, api
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.7
+Stable tag: 1.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,7 +65,23 @@ Yes, it works with any store that has WooCommerce installed and active.
 1. Admin Settings Page – SwiftNotify Configuration
 2. Message Template Example with placeholders
 
+== External Services ==
+
+This plugin connects to the SwiftNotify API to send WhatsApp messages to customers and store owners based on WooCommerce order events.
+
+- What data is sent: Phone number, message content, your API credentials (App Key and Auth Key).
+- When: Only when a message needs to be sent (e.g., order placed, order status changed, manual message).
+- Service provider: SwiftNotify (https://whatswift.com)  
+  - [Terms of Service](https://whatswift.com/page/terms-and-conditions)  
+  - [Privacy Policy](https://whatswift.com/page/privacy-policy-for-whatswift)
+
 == Changelog ==
+
+= 1.8 =
+* Fixed: Security improvements (nonce + capability checks)  
+* Fixed: Output escaping and sanitization  
+* Fixed: JavaScript and CSS loading using wp_enqueue  
+* Added: External service documentation in readme  
 
 = 1.6 =
 * Added dynamic message templates for all WooCommerce order statuses  
@@ -82,5 +98,5 @@ Yes, it works with any store that has WooCommerce installed and active.
 
 == Upgrade Notice ==
 
-= 1.6 =
-Recommended upgrade with major improvements, personalization options, and enhanced UI.
+= 1.8 =
+Required upgrade for security, proper asset handling, escaping, and external service compliance.
