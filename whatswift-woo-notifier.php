@@ -1,14 +1,15 @@
 <?php
 /*
-Plugin Name: SwiftNotify – WhatsApp Alerts for WooCommerce
+Plugin Name: SwiftNotify – Instant Order Alerts for WooCommerce
 Plugin URI: https://whatswift.com/
-Description: Sends WhatsApp messages to WooCommerce customers and seller using the Whatswift API when an order is placed or updated.
-Version: 1.6
+Description: Sends instant order alerts to WooCommerce customers and store admin using the SwiftNotify API when an order is placed or updated.
+Version: 1.7
 Author: Ahmad Foysal
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires Plugins: woocommerce
 */
+
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
