@@ -39,6 +39,6 @@ Source repository for the WordPress.org plugin
 
 ## Release
 
-1. Bump `Version:` and `SNFW_VERSION` in the main file and `Stable tag:` in `readme.txt`; add a changelog entry.
-2. Tag the release and push.
-3. Deploy to WordPress.org SVN (`trunk/` + `tags/X.Y.Z/`), leaving out the paths in `.distignore`.
+1. Bump `Version:` and `SNFW_VERSION` in the main file and `Stable tag:` in `readme.txt`; add a changelog entry. Merge to `main`.
+2. On GitHub, publish a release whose tag is exactly the version (for example `2.0.0`), targeting `main`.
+3. The `Deploy to WordPress.org` workflow uploads `trunk/`, `tags/<version>/` and the listing assets from `.wordpress-org/`, leaving out the paths in `.distignore`. It needs the repository secrets `SVN_USERNAME` and `SVN_PASSWORD`.
