@@ -12,6 +12,8 @@ Send WhatsApp messages to your WooCommerce customers and to yourself when orders
 
 == Description ==
 
+🎥 Watch demo: https://youtu.be/JZZl-mwcAcE?si=xJ5f8WC6hhPifZpI
+
 **SwiftNotify** is a WhatsApp automation plugin for WooCommerce that enables real-time order alerts for customers and store owners.
 
 It automatically sends a WhatsApp message when:
@@ -19,11 +21,15 @@ It automatically sends a WhatsApp message when:
 - An order status is updated (e.g., completed, cancelled)
 
 **Key Features:**
-- 🔔 WhatsApp alerts for customers on order creation
-- 🔄 Status-based alerts (completed, cancelled, etc.)
-- 🧾 Separate seller alert message with different template
-- ✏️ Customizable message templates with smart placeholders
-- ⚙️ Easy setup: just add your App Key and Auth Key from [Whatswift](https://whatswift.com)
+* 🔔 WhatsApp alerts for customers when an order is placed
+* 🔄 Status-based notifications (e.g. completed, cancelled, refunded, etc.)
+* 🧾 Separate alert message for store owner with custom template
+* ✏️ Customizable message templates using smart placeholders:
+  `{name}`, `{order_id}`, `{product_names}`, `{order_total}`, etc.
+* 🧍‍♂️ Custom Message tab – manually send WhatsApp messages from admin panel
+* 📢 Bulk Messaging tab (UI included, feature coming soon)
+* 🎨 Tabbed admin settings page with clean and modern UI
+* ⚙️ Easy setup with Whatswift App Key and Auth Key
 
 == Installation ==
 
@@ -60,6 +66,13 @@ Yes, it works with any store that has WooCommerce installed and active.
 2. WhatsApp Message Template Example with placeholders
 
 == Changelog ==
+
+= 1.6 =
+* Added dynamic WhatsApp templates for all WooCommerce order statuses  
+* Added placeholder reference guide for easier message personalization  
+* Introduced “Custom Message” feature to manually send WhatsApp messages to any number  
+* Added “Bulk Messaging” tab (UI only – feature coming soon)  
+* Enhanced UI design and admin panel layout 
 
 = 1.5 =
 * Initial public release
