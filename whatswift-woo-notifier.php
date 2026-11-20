@@ -3,7 +3,7 @@
 Plugin Name: SwiftNotify – Instant Order Alerts for WooCommerce
 Plugin URI: https://whatswift.com/
 Description: Sends instant order alerts to WooCommerce customers and store admin using the SwiftNotify API when an order is placed or updated.
-Version: 1.8
+Version: 1.9
 Author: Ahmad Foysal
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -13,6 +13,12 @@ Requires Plugins: woocommerce
 */
 
 if (!defined('ABSPATH')) exit;
+
+
+// Tutorial video embed URL
+if (!defined('SNFW_TUTORIAL_URL')) {
+    define('SNFW_TUTORIAL_URL', 'https://www.youtube-nocookie.com/embed/KBCkDqoO5og?rel=0&modestbranding=1&iv_load_policy=3');
+}
 
 add_action('admin_menu', function () {
     add_menu_page(
@@ -96,7 +102,7 @@ function snfw_settings_page()
             <li><a href="#customer-notifications" class="nav-tab" onclick="showTab(event, 'customer-notifications')">Customer Notifications</a></li>
             <li><a href="#seller-notifications" class="nav-tab" onclick="showTab(event, 'seller-notifications')">Seller Notifications</a></li>
             <li><a href="#custom-message" class="nav-tab" onclick="showTab(event, 'custom-message')">✉️ Custom Message</a></li>
-            <li><a href="#bulk-messaging" class="nav-tab" onclick="showTab(event, 'bulk-messaging')">📢 Bulk Messaging</a></li>
+            <li><a href="#bulk-messaging" class="nav-tab" onclick="showTab(event, 'bulk-messaging')">📺 Tutorial</a></li>
         </ul>
         <form method="post" action="options.php">
             <?php
@@ -149,9 +155,33 @@ function snfw_settings_page()
             </div>
 
             <div id="bulk-messaging" class="tab-content" style="display:none">
-                <div class="card">
-                    <p>Coming Soon</p>
+                <!--<div class="card">-->
+                <!--    <p>Coming Soon</p>-->
+                <!--</div>-->
+
+
+
+                <div class="card" style="max-width:980px;">
+                    <div class="card-header">📺 SwiftNotify – Video Tutorial</div>
+                    <div class="snfw-video-wrap" style="position:relative;width:100%;padding-top:56.25%;border-radius:12px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,0.08);background:#000;">
+                        <iframe
+                            src="<?php echo esc_url(SNFW_TUTORIAL_URL); ?>"
+                            title="SwiftNotify Tutorial"
+                            loading="lazy"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen
+                            style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
+                        </iframe>
+                    </div>
                 </div>
+            </div>
+
+
+            <div style="margin-top:30px; padding:15px; background:#e6f7ed; border-left:4px solid #25D366; border-radius:6px;">
+                <strong>📞 Need Help?</strong><br>
+                WhatsApp: <a href="https://wa.me/8801303705753" target="_blank" style="color:#25D366;font-weight:bold;text-decoration:none;">8801303 705 753</a><br>
+                Support Email: <a href="mailto:support@whatswift.com" style="color:#25D366;font-weight:bold;text-decoration:none;">support@whatswift.com</a>
             </div>
 
             <div class="submit-row" id="snfw-settings-submit">

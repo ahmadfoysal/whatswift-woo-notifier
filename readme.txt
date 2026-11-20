@@ -4,7 +4,7 @@ Tags: woocommerce, order notification, message, sms, api
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.8
+Stable tag: 1.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,6 +77,10 @@ This plugin connects to the SwiftNotify API to send WhatsApp messages to custome
 
 == Changelog ==
 
+= 1.9 =
+* Added: Tutorial tab with embedded YouTube (privacy-friendly youtube-nocookie) 
+* UI: Settings page help section (WhatsApp contact)
+
 = 1.8 =
 * Fixed: Security improvements (nonce + capability checks)  
 * Fixed: Output escaping and sanitization  
@@ -97,6 +101,9 @@ This plugin connects to the SwiftNotify API to send WhatsApp messages to custome
 * Logging enabled for message debugging  
 
 == Upgrade Notice ==
+
+= 1.9 =
+Added Tutorial tab with video tutorial and support info. Recommended upgrade for better onboarding.
 
 = 1.8 =
 Required upgrade for security, proper asset handling, escaping, and external service compliance.
