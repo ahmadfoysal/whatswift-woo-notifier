@@ -1,10 +1,17 @@
 name: Deploy to WordPress.org
 
-# Publishing a GitHub release named after the version (for example 2.0.0)
-# uploads the plugin to WordPress.org: trunk, tags/<version> and listing assets.
+# Deploys when a GitHub release is published, when main is pushed with a
+# version that is not on WordPress.org yet, or when started by hand.
 on:
   release:
     types: [published]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: wporg-deploy
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -12,20 +19,34 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check the release name matches the plugin version
+      - name: Read and check the version
+        id: version
         run: |
           version=$(grep -m1 -E '^\s*\*\s*Version:' whatswift-woo-notifier.php | sed -E 's/.*Version:\s*//' | tr -d '[:space:]')
           stable=$(grep -m1 -E '^Stable tag:' readme.txt | sed -E 's/Stable tag:\s*//' | tr -d '[:space:]')
-          tag="${GITHUB_REF_NAME}"
-          echo "release=$tag plugin=$version readme=$stable"
-          if [ "$tag" != "$version" ] || [ "$tag" != "$stable" ]; then
-            echo "::error::Release '$tag' does not match plugin version '$version' / stable tag '$stable'."
+          echo "plugin=$version readme=$stable event=${GITHUB_EVENT_NAME} ref=${GITHUB_REF_NAME}"
+          if [ "$version" != "$stable" ]; then
+            echo "::error::Plugin version '$version' and readme Stable tag '$stable' differ."
             exit 1
           fi
+          if [ "${GITHUB_EVENT_NAME}" = "release" ] && [ "${GITHUB_REF_NAME}" != "$version" ]; then
+            echo "::error::Release '${GITHUB_REF_NAME}' does not match plugin version '$version'."
+            exit 1
+          fi
+          code=$(curl -s -o /dev/null -w '%{http_code}' "https://plugins.svn.wordpress.org/whatswift-woo-notifier/tags/$version/")
+          if [ "$code" = "200" ]; then
+            echo "Version $version is already on WordPress.org; nothing to deploy."
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
 
       - name: Deploy
+        if: steps.version.outputs.deploy == 'true'
         uses: 10up/action-wordpress-plugin-deploy@stable
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SLUG: whatswift-woo-notifier
+          VERSION: ${{ steps.version.outputs.version }}
