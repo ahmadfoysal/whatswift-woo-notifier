@@ -11,3 +11,4 @@ composer.lock
 package.json
 package-lock.json
 phpcs.xml.dist
+/design
